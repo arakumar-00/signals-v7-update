@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "245922029776",
+    "project_id": "forex-signal-app-c0c32",
+    "storage_bucket": "forex-signal-app-c0c32.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245922029776:android:93d40fbaa94e47741d3ed5",
+        "android_client_info": {
+          "package_name": "com.safikumar00.forexsignalapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbXGcKsgdQkBDfkp9FJaM9cwktB1le0w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

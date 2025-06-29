@@ -1,0 +1,7 @@
+node_modules
+*.log
+android/app/build
+ios/build
+*.tmp
+.DS_Store
+.env.local
