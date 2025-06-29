@@ -8,7 +8,6 @@ export async function fetchSignals(): Promise<Signal[]> {
       .select('*')
       .order('timestamp', { ascending: false });
 
-    console.log('📦 Fetched signals:', data);
     if (error) {
       console.error('❌ Error fetching signals:', error);
       return getMockSignals();
@@ -20,7 +19,6 @@ export async function fetchSignals(): Promise<Signal[]> {
     return getMockSignals();
   }
 }
-
 
 // Subscribe to real-time signals with improved error handling
 export function subscribeToSignals(callback: (signals: Signal[]) => void) {

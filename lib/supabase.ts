@@ -69,6 +69,9 @@ export interface Signal {
   risk_reward?: string;
   pnl?: number;
   created_at: string;
+  tp_hit?: boolean;
+  sl_hit?: boolean;
+  updated_at?: string;
 }
 
 export interface MarketData {

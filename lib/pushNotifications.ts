@@ -3,6 +3,8 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { createNotification } from './database';
+import { getFCMToken } from './firebase';
+import { registerDevice } from './fcmManager';
 
 // Configure notification behavior
 Notifications.setNotificationHandler({
@@ -18,23 +20,6 @@ export interface PushNotificationData {
   title: string;
   message: string;
   data?: any;
-}
-
-// Generate unique device ID
-export async function getDeviceId(): Promise<string> {
-  try {
-    const deviceInfo = Device.osInternalBuildId || 
-                      Device.deviceName || 
-                      Device.modelName || 
-                      'unknown-device';
-    
-    const cleanId = deviceInfo.replace(/\s+/g, '-').toLowerCase();
-    const timestamp = Date.now();
-    return `device_${cleanId}_${timestamp}`;
-  } catch (error) {
-    console.error('Error getting device ID:', error);
-    return `device_fallback_${Date.now()}`;
-  }
 }
 
 // Request notification permissions
@@ -72,8 +57,7 @@ export async function requestNotificationPermissions(): Promise<boolean> {
 async function getPushToken(): Promise<string | null> {
   try {
     if (Platform.OS === 'web') {
-      console.log('🌐 Web platform - FCM tokens not supported in this demo');
-      return null;
+      return await getFCMToken();
     }
 
     if (!Device.isDevice) {
@@ -112,10 +96,17 @@ export async function registerForPushNotifications(): Promise<string | null> {
     }
 
     const pushToken = await getPushToken();
-    const deviceId = await getDeviceId();
     
-    console.log('✅ Device registered for push notifications');
-    return deviceId;
+    // Register device with token
+    const result = await registerDevice(pushToken || undefined);
+    
+    if (result.success) {
+      console.log('✅ Device registered for push notifications');
+      return pushToken;
+    } else {
+      console.error('❌ Failed to register device:', result.error);
+      return null;
+    }
   } catch (error) {
     console.error('❌ Error registering for push notifications:', error);
     return null;
@@ -149,36 +140,6 @@ export function setupNotificationListeners() {
     console.log('🧹 Cleaning up notification listeners');
     listeners.forEach(cleanup => cleanup());
   };
-}
-
-// Send a local notification
-export async function sendLocalNotification(data: PushNotificationData): Promise<void> {
-  try {
-    console.log('📤 Sending local notification:', data.title);
-
-    if (Platform.OS === 'web') {
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification(data.title, {
-          body: data.message,
-          icon: '/assets/images/icon.png',
-          data: data.data,
-        });
-      }
-    } else {
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: data.title,
-          body: data.message,
-          data: data.data,
-        },
-        trigger: null,
-      });
-    }
-
-    console.log('✅ Local notification sent');
-  } catch (error) {
-    console.error('❌ Error sending local notification:', error);
-  }
 }
 
 // Create notification in database
