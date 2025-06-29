@@ -33,3 +33,16 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# .gitignore and .easignore
+
+node_modules
+*.log
+*.tmp
+*.DS_Store
+.env
+.expo
+.expo-shared
+android/app/build
+ios/build
+web-build
