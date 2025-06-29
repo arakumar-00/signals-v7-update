@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:245922029776:android:212f60cd1375edf01d3ed5",
+        "android_client_info": {
+          "package_name": "com.safikumar00.boltexponativewind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbXGcKsgdQkBDfkp9FJaM9cwktB1le0w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:245922029776:android:93d40fbaa94e47741d3ed5",
         "android_client_info": {
           "package_name": "com.safikumar00.forexsignalapp"
