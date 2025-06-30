@@ -23,18 +23,20 @@
       "expo-notifications",
       "expo-secure-store"
     ],
-    "experiments": {
-      "typedRoutes": true
+    "android": {
+      "package": "com.safikumar00.boltexponativewind",
+      "useNextNotificationsApi": true
     },
     "extra": {
       "router": {},
       "eas": {
         "projectId": "8ce373b5-978a-43ad-a4cb-3ad8feb6e149"
-      }
+      },
+      "apiUrl": "https://govngwsrefzqnuczhzdi.supabase.co"
     },
     "owner": "safikumar00",
-    "android": {
-      "package": "com.safikumar00.boltexponativewind"
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
